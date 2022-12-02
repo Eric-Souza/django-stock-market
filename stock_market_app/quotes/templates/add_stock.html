@@ -1,6 +1,6 @@
 {% extends 'base.html' %}  
 {% block content %}
-  <h1>Add Stock</h1> 
+  <h1>My Portfolio</h1> 
   <br /> 
 
   <form action="{% url 'add_stock' %}" class="d-flex" role="search" method="POST">
@@ -9,7 +9,7 @@
     <input
       class="form-control me-2"
       type="search"
-      placeholder="Add to Portfolio"
+      placeholder="Add Stock to Portfolio"
       aria-label="Search"
       name="ticker"
     />

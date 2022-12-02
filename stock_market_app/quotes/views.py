@@ -8,10 +8,11 @@ def home(request):
   import requests
   import json
   
-  iexcloud_key = 'pk_29b131419c054b429aa9bf1f49b93cf6'
-  
+  # If user searches for a ticker in the navbar or clicks on the table
   if request.method == 'POST':
     ticker = request.POST['ticker']
+    
+    iexcloud_key = 'pk_29b131419c054b429aa9bf1f49b93cf6'
     
     api_request = requests.get(
       "https://cloud.iexapis.com/stable/stock/" + ticker + "/quote?token=" + iexcloud_key + ""
@@ -25,7 +26,20 @@ def home(request):
     return render(request, 'home.html', {'api': api})
     
   else: 
-    return render(request, 'home.html', {'ticker': 'Please enter a ticker symbol in the search input'})
+    companies_data = []
+    
+    with open("C:/Development/projects/mine/django_stock/stock_market_app/quotes/static/tickers.txt") as tickers_file:
+      for line in tickers_file:
+        line_parts = line.split(',')
+        
+        company_ticker = line_parts[0]
+        company_name = line_parts[1]
+        company_industry = line_parts[2]
+        
+        company_data = {"ticker": company_ticker, "name": company_name, "industry": company_industry}
+        companies_data.append(company_data)
+      
+    return render(request, 'home.html', {'companies_data': companies_data})
 
   
 def about(request):
