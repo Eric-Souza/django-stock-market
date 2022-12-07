@@ -11,7 +11,6 @@ def home(request):
   # If user searches for a ticker in the navbar or clicks on the table
   if request.method == 'POST':
     ticker = request.POST['ticker']
-    
     iexcloud_key = 'pk_29b131419c054b429aa9bf1f49b93cf6'
     
     api_request = requests.get(
@@ -30,11 +29,11 @@ def home(request):
     
     with open("C:/Development/projects/mine/django_stock/stock_market_app/quotes/static/tickers.txt") as tickers_file:
       for line in tickers_file:
-        line_parts = line.split(',')
+        line_part = line.split(',')
         
-        company_ticker = line_parts[0]
-        company_name = line_parts[1]
-        company_industry = line_parts[2]
+        company_ticker = line_part[0]
+        company_name = line_part[1]
+        company_industry = line_part[2]
         
         company_data = {"ticker": company_ticker, "name": company_name, "industry": company_industry}
         companies_data.append(company_data)
